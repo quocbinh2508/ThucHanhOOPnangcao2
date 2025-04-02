@@ -81,100 +81,47 @@ class Program
     private static double sideB;
     private static double sideC;
 
+    private static double GetValidInput(string prompt)
+    {
+        double value;
+        Console.Write(prompt);
+        while (true)
+        {
+            if (double.TryParse(Console.ReadLine(), out value) && value > 0) 
+            {
+                return value;
+            }
+            else
+            {
+                Console.WriteLine("Gia tri nhap khong dung. Gia tri phai la so duong!");
+                Console.WriteLine(prompt);
+            }
+        }
+    }
+
+    public static void DisplayShapeInfo(string ShapeName, double area, double Circumference)
+    {
+        Console.WriteLine($"Thong tin cua {ShapeName}");
+        Console.WriteLine("Dien tich: " + area);
+        Console.WriteLine("Chu vi: " + Circumference);
+        Console.WriteLine();
+    }
     public static void Main(string[] args)
     {
-
-        Console.Write("Nhap chieu dai hinh chu nhat: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out length) && length > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
-        Console.Write("Nhap chieu rong hinh chu nhat: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out width) && width > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
+        double length = GetValidInput("Nhap chieu dai hinh chu nhat: ");
+        double width = GetValidInput("Nhap chieu rong hinh chu nhat: ");
         Rectangle rectangle = new Rectangle(length, width);
 
-        Console.Write("Nhap ban kinh hinh tron: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out radius) && radius > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
+        double radius = GetValidInput("Nhap ban kinh hinh tron: ");
         Circle circle = new Circle(radius);
 
-        Console.Write("Nhap canh a hinh tam giac: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out sideA) && sideA > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
-        Console.Write("Nhap canh b hinh tam giac: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out sideB) && sideB > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
-        Console.Write("Nhap canh c hinh tam giac: ");
-        while (true)
-        {
-            if (double.TryParse(Console.ReadLine(), out sideC) && sideC > 0)
-            {
-                break;
-            }
-            else
-            {
-                Console.Write("Gia tri nhap khong dung, do dai phai la so duong!");
-            }
-        }
+        double sideA = GetValidInput("Nhap chieu dai canh A: ");
+        double sideB = GetValidInput("Nhap chieu dai canh B: ");
+        double sideC = GetValidInput("Nhap chieu dai canh C: ");
         Triangle triangle = new Triangle(sideA, sideB, sideC);
 
-        Console.WriteLine("Hinh chu nhat: ");
-        Console.WriteLine("Dien tich: " + rectangle.CalculateArea());
-        Console.WriteLine("Chu Vi: " + rectangle.CalculateCircumference());
-        Console.WriteLine();
-
-        Console.WriteLine("Hinh tron: ");
-        Console.WriteLine("Dien tich: " + circle.CalculateArea());
-        Console.WriteLine("Chu Vi: " + circle.CalculateCircumference());
-        Console.WriteLine();
-
-        Console.WriteLine("Hinh tam giac: ");
-        Console.WriteLine("Dien tich: " + triangle.CalculateArea());
-        Console.WriteLine("Chu Vi: " + triangle.CalculateCircumference());
-        Console.WriteLine();
+        DisplayShapeInfo("Hinh chu nhat: ", rectangle.CalculateArea(), rectangle.CalculateCircumference());
+        DisplayShapeInfo("Hinh tron: ", circle.CalculateArea(), circle.CalculateCircumference());
+        DisplayShapeInfo("Hinh tam giac: ", triangle.CalculateArea(), triangle.CalculateCircumference());
     }
 }
